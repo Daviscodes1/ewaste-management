@@ -4,6 +4,18 @@ include "../include/db_conn.php";
 $action = $_POST['submit'];
 
 switch($action) {
+	case 'addregion':
+		$status = "Active";
+		$user = str_replace("'", "''",$_POST['user']);
+		$region = str_replace("'", "''",$_POST['region']);
+		$sql = $conn->query("INSERT INTO region (regionname, status, addedby)
+			VALUES ('$region', '$status', '$user')");
+		$conn = null;
+		echo "
+		<script>alert('Region has been created successfully!')</script>
+		<script>window.location = 'trash.php'</script>
+		";
+	break;
 	case 'billnow':
 		$user = $_POST['user'];
 		$empid = $_POST['empid'];
